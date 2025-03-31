@@ -2922,7 +2922,7 @@
 		"properties": {
 			"availability": {
 				"title": "Availability",
-				"summary": "Available in closed beta",
+				"summary": "Available in open beta",
 				"free": "No",
 				"pro": "No",
 				"biz": "No",
