@@ -120,6 +120,7 @@ for (const platform of platforms) {
 							...item,
 							releaseNotes,
 							platformName,
+							linuxPlatforms: isLinux ? [platform] : undefined,
 						}),
 						"utf-8",
 					);
