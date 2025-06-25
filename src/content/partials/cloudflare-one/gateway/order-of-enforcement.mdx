@@ -135,6 +135,12 @@ flowchart TB
     egress1-- "Egress with dedicated IP" -->internet
 ```
 
+## Connection establishment
+
+When a user connects to a server with Gateway, Gateway first establishes a TCP connection with the destination server on the port the user requested. If the connection is successful, Gateway will apply policies. If Gateway policies allow the connection, Gateway will connect the user to the destination. If Gateway policies block the connection, Gateway will end the connection and will not send any data between the user and the destination. If the TCP connection to the destination is unsuccessful, Gateway will not run any policies nor accept further TCP connections from the user.
+
+Connections to Zero Trust will always appear in your [Zero Trust network session logs](/logs/reference/log-fields/account/zero_trust_network_sessions/) regardless of success or failure. Because Gateway does not inspect failed connections, they will not appear in your [Gateway activity logs](/cloudflare-one/insights/logs/gateway-logs/).
+
 ## Priority between policy builders
 
 Gateway applies your policies in the following order:
