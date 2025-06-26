@@ -20,6 +20,7 @@ WARP settings define the WARP client modes and permissions available to end user
 - [Device settings](#device-settings) may vary across devices depending on which [device profile](/cloudflare-one/connections/connect-devices/warp/configure-warp/device-profiles/) is applied.
 
 :::note
+
 <Render file="warp/client-notification-lag" product="cloudflare-one" />
 :::
 
@@ -36,6 +37,7 @@ To use **Admin override**, you must first have enabled [**Lock WARP switch**](#l
 When [**Lock WARP switch**](#lock-warp-switch) is enabled, users cannot toggle the WARP client on and off on their device. Enabling **Admin override** gives users the ability to temporarily turn on or off the WARP client using an override code provided by an admin. **Admin override** is only needed in a configuration where **Lock WARP switch** is enabled.
 
 Example use cases for **Admin override** include:
+
 - Allowing users to momentarily turn off WARP to work around a temporary network issue such as an incompatible public Wi-Fi, or a firewall at a customer site blocking the connection.
 - Allowing test users to turn on WARP when [Global WARP override](#global-warp-override) is in effect.
 
@@ -121,13 +123,13 @@ The CGNAT IP assigned to a WARP device is permanent until the device unregisters
 
 | [WARP modes](/cloudflare-one/connections/connect-devices/warp/configure-warp/warp-modes/) | [Zero Trust plans](https://www.cloudflare.com/teams-pricing/) |
 | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| All modes                                                             | All plans                                                     |
+| All modes                                                                                 | All plans                                                     |
 
 | System   | Availability | Minimum WARP version |
 | -------- | ------------ | -------------------- |
-| Windows  | ✅           | 2025.2.600.0        |
-| macOS    | ✅           |  2025.2.600.0                    |
-| Linux    | ✅           |   2025.2.600.0                |
+| Windows  | ✅           | 2025.2.600.0         |
+| macOS    | ✅           | 2025.2.600.0         |
+| Linux    | ✅           | 2025.2.600.0         |
 | iOS      | ❌           |                      |
 | Android  | ❌           |                      |
 | ChromeOS | ❌           |                      |
@@ -230,6 +232,8 @@ When `Enabled`, users can log out from your Zero Trust organization by selecting
 </Details>
 
 When `Enabled`, users will receive update notifications when a new version of the client is available. Only turn this on if your users are local administrators with the ability to add or remove software from their device.
+
+Usually disabled on managed devices. If enabled, users who are local administrators on their device can update the WARP client on their own — this can introduce version consistency control issues if WARP versions are centrally managed by IT.
 
 ### Auto connect
 
@@ -387,7 +391,7 @@ If you use on-premise DNS infrastructure (such as Active Directory), we recommen
 
 | System   | Availability | Minimum WARP version |
 | -------- | ------------ | -------------------- |
-| Windows  | ✅           |  2025.5.735.1        |
+| Windows  | ✅           | 2025.5.735.1         |
 | macOS    | ❌           |                      |
 | Linux    | ❌           |                      |
 | iOS      | ❌           |                      |
@@ -410,63 +414,63 @@ After setting the network interface description, WARP will restart the SMS Agent
 
 Assume you want to push software updates from a cloud based [distribution point](https://learn.microsoft.com/en-us/intune/configmgr/core/servers/deploy/configure/boundary-groups-distribution-points) if the device is remote, but use on-prem servers if the device is on the office network. To set up these boundary groups:
 
-1. In Zero Trust:
+1.  In Zero Trust:
 
-		a. Turn on **SCCM VPN Boundary Support** for remote [device profiles](/cloudflare-one/connections/connect-devices/warp/configure-warp/device-profiles/).
+        a. Turn on **SCCM VPN Boundary Support** for remote [device profiles](/cloudflare-one/connections/connect-devices/warp/configure-warp/device-profiles/).
 
-		b. Turn off **SCCM VPN Boundary Support** for [on-prem device profiles](/cloudflare-one/connections/connect-devices/warp/configure-warp/managed-networks/#4-configure-device-profile).
+        b. Turn off **SCCM VPN Boundary Support** for [on-prem device profiles](/cloudflare-one/connections/connect-devices/warp/configure-warp/managed-networks/#4-configure-device-profile).
 
-		c. (Optional) Verify device settings:
+        c. (Optional) Verify device settings:
 
-	<Details header="Verify SCCM VPN Boundary Support">
+    <Details header="Verify SCCM VPN Boundary Support">
 
-	To check if **SCCM VPN Boundary Support** is active on a device, run the following command:
+    To check if **SCCM VPN Boundary Support** is active on a device, run the following command:
 
-	```cmd
-	warp-cli settings | findstr "SCCM VPN Boundary"
-	```
+    ```cmd
+    warp-cli settings | findstr "SCCM VPN Boundary"
+    ```
 
-	```cmd output
-	(network policy) SCCM VPN Boundary Support: true
-	```
+    ```cmd output
+    (network policy) SCCM VPN Boundary Support: true
+    ```
 
-	You can also verify network interface details for the `CloudflareWARP` adapter:
+    You can also verify network interface details for the `CloudflareWARP` adapter:
 
-	```cmd
-	ipconfig /all
-	```
+    ```cmd
+    ipconfig /all
+    ```
 
-	```cmd output {8}
-	Windows IP Configuration
+    ```cmd output {8}
+    Windows IP Configuration
 
-	...
+    ...
 
-	Unknown adapter CloudflareWARP:
+    Unknown adapter CloudflareWARP:
 
-		Connection-specific DNS Suffix  . :
-		Description . . . . . . . . . . . : (SCCM) Cloudflare WARP Interface Tunnel
-		Physical Address. . . . . . . . . :
-		DHCP Enabled. . . . . . . . . . . : No
-		Autoconfiguration Enabled . . . . : Yes
-		IPv6 Address. . . . . . . . . . . : 2606:4700:110:8f79:145:f180:fc4:8106(Preferred)
-		Link-local IPv6 Address . . . . . : fe80::83b:d647:4bed:d388%49(Preferred)
-		IPv4 Address. . . . . . . . . . . : 172.16.0.2(Preferred)
-		Subnet Mask . . . . . . . . . . . : 255.255.255.255
-		Default Gateway . . . . . . . . . :
-		DNS Servers . . . . . . . . . . . : 127.0.2.2
-																				127.0.2.3
-		NetBIOS over Tcpip. . . . . . . . : Enabled
-	```
+    	Connection-specific DNS Suffix  . :
+    	Description . . . . . . . . . . . : (SCCM) Cloudflare WARP Interface Tunnel
+    	Physical Address. . . . . . . . . :
+    	DHCP Enabled. . . . . . . . . . . : No
+    	Autoconfiguration Enabled . . . . : Yes
+    	IPv6 Address. . . . . . . . . . . : 2606:4700:110:8f79:145:f180:fc4:8106(Preferred)
+    	Link-local IPv6 Address . . . . . : fe80::83b:d647:4bed:d388%49(Preferred)
+    	IPv4 Address. . . . . . . . . . . : 172.16.0.2(Preferred)
+    	Subnet Mask . . . . . . . . . . . : 255.255.255.255
+    	Default Gateway . . . . . . . . . :
+    	DNS Servers . . . . . . . . . . . : 127.0.2.2
+    																			127.0.2.3
+    	NetBIOS over Tcpip. . . . . . . . : Enabled
+    ```
 
-	</Details>
+    </Details>
 
-2. In Microsoft SCCM:
+2.  In Microsoft SCCM:
 
-		a. [Create a boundary](https://learn.microsoft.com/en-us/intune/configmgr/core/servers/deploy/configure/boundaries#create-a-boundary) with the following settings:
-			- **Description**: `Remote WARP clients`
-			- **Type**: _VPN_
-			- **Connection description**: `(SCCM) Cloudflare WARP Interface Tunnel`
+        a. [Create a boundary](https://learn.microsoft.com/en-us/intune/configmgr/core/servers/deploy/configure/boundaries#create-a-boundary) with the following settings:
+        	- **Description**: `Remote WARP clients`
+        	- **Type**: _VPN_
+        	- **Connection description**: `(SCCM) Cloudflare WARP Interface Tunnel`
 
-  	b. Assign this boundary to one or more boundary groups.
+    b. Assign this boundary to one or more boundary groups.
 
 When the device is remote, the WARP interface description changes to `(SCCM) Cloudflare WARP Interface Tunnel` and the SCCM server will determine that the device belongs to the VPN boundary group. The device can now download updates from the distribution point assigned to this boundary group. When a network change occurs and WARP detects a managed network, it will revert the interface description to `Cloudflare WARP Interface Tunnel` and the boundary condition will no longer be satisfied. The device will match your local IP range and be considered as on-prem.
