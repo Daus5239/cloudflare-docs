@@ -198,7 +198,9 @@ The only exception is if you are using [Clientless Web Isolation](/cloudflare-on
 
 Next, Gateway checks decrypted traffic against your Isolate policies. When a user makes a request which triggers an Isolate policy, the request will be rerouted to a [remote browser](/cloudflare-one/policies/browser-isolation/).
 
-Lastly, Gateway evaluates all Allow, Block, and Do Not Scan policies. These policies apply to both isolated and non-isolated traffic. For example, if `example.com` is isolated and `example.com/subpage` is blocked, Gateway will block the subpage inside of the remote browser.
+Next, Gateway evaluates all Allow, Block, and Do Not Scan policies. These policies apply to both isolated and non-isolated traffic. For example, if `example.com` is isolated and `example.com/subpage` is blocked, Gateway will block the subpage inside of the remote browser.
+
+Lastly, Gateway evaluates the body of the HTTP request by evaluating DLP policies and running anti-virus scanning and file sandboxing. If DLP policies are present, the action Gateway takes may not [match its logs](#dlp-policy-precedence).
 
 ### Resolver policies
 
