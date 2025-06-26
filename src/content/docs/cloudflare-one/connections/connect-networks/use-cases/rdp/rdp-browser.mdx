@@ -145,6 +145,24 @@ Browser-based RDP supports connecting to Windows machines that run the following
 | Other Chromium-based browsers (Opera, Brave) | ✅            |
 | Internet Explorer 11 and below               | ❌            |
 
+### Windows login formats
+
+Browser-based RDP supports connecting to Windows machines using the following login formats:
+
+SAM, with or without spaces
+domain\user with spaces (domain max 20 chars, username max 15 chars)
+.\user with spaces (default domain, user max 20 chars)
+
+Example
+
+User Principal Name (UPN), with spaces, quotes, or unquoted
+
+
+Security Accounts Manager (SAM) format with spaces:
+"user with spaces"@domain.org
+user with spaces@domain.org
+
+
 ### Cloudflare products
 
  <Render file="access/self-hosted-app/product-compatibility" product="cloudflare-one" />
