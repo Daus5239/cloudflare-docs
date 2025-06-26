@@ -144,7 +144,7 @@ To connect to a Windows machine over RDP:
 	The App Launcher tile will launch a URL of the form `https://<app-domain>/rdp/<vnet-id>/<target-ip>/<port>`. You may also navigate directly to this URL.
 4. Select the port that you want to connect to. The port selection screen only appears if the Access application allows RDP traffic on multiple ports (for example, port `3389` and port `65321`).
 5. (Optional) In your browser settings, allow the Access application to access the clipboard. Clipboard permissions grant the ability to copy or paste text between the local machine and the remote Windows machine.
-6. Enter your Windows username and password.
+6. Enter your Windows username and password. The section below on compatibility covers which formats are supported for login credentials.
 
 You now have access to the remote Windows desktop.
 
@@ -174,23 +174,37 @@ Browser-based RDP supports connecting to Windows machines that run the following
 | Other Chromium-based browsers (Opera, Brave) | ✅            |
 | Internet Explorer 11 and below               | ❌            |
 
-### Windows login formats
+### User identifier formats
 
-Browser-based RDP supports connecting to Windows machines using the following login formats:
+Browser-based RDP supports connecting to Windows machines with the following formats:
 
-SAM, with or without spaces
-domain\user with spaces (domain max 20 chars, username max 15 chars)
-.\user with spaces (default domain, user max 20 chars)
+#### Security Accounts Manager (SAM)
 
-Example
+SAM is supported with and without spaces.
 
-User Principal Name (UPN), with spaces, quotes, or unquoted
+`domain\user with spaces` format:
+- The domain may have a maximum of 20 characters.
+- The username may have a maximum of 15 characters.
 
+`.\user` format:
+- This uses the default domain.
+- The username may have a maximum of 20 characters.
 
-Security Accounts Manager (SAM) format with spaces:
-"user with spaces"@domain.org
-user with spaces@domain.org
+Examples:
+- `DOMAIN\user with spaces`
+- `DOMAIN\user`
 
+#### User Principal Name (UPN)
+
+UPN is supported with spaces, quotes, and unquoted.
+
+Examples:
+- `"user with spaces"@domain.org`
+- `user with spaces@domain.org`
+
+:::note
+		Cloudflare will not configure any user identifier on the target. Any user identifier used to authenticate must be pre-configured on the server.
+:::
 
 ### Cloudflare products
 
