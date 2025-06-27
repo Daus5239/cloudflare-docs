@@ -209,6 +209,16 @@ Examples:
 		Cloudflare will not configure any user identifier on the target. Any user identifier used to authenticate must be pre-configured on the server.
 :::
 
+### Clipboard file formats
+
+Browser-based RDP supports the following file formats for clipboard copy and paste actions:
+- "text/plain"
+- "text/html"
+- "image/png"
+- "HTML Format" (via CF_HTML)
+- CF_UNICODETEXT
+- CF_DIBV5 (Windows native bitmap formats)
+
 ### Cloudflare products
 
  <Render file="access/self-hosted-app/product-compatibility" product="cloudflare-one" />
@@ -218,9 +228,10 @@ Examples:
 Browser-based RDP does not currently support:
 
 - TLS certificate verification: Cloudflare uses TLS to connect to the target RDP server but does not verify the origin TLS certificate.
-- [WARP authentication](/cloudflare-one/connections/connect-devices/warp/configure-warp/warp-sessions/#configure-warp-sessions-in-access)
-- Audio over RDP
-- File transfer
-- Clipboard control
+- [WARP authentication](/cloudflare-one/connections/connect-devices/warp/configure-warp/warp-sessions/#configure-warp-sessions-in-access).
+- Clipboard copy and paste control: the ability to define if users can copy/paste content from the remote machine to their local machine and vice versa.
+- Audio over RDP.
+- File transfer.
+
 
 
