@@ -180,7 +180,7 @@ Browser-based RDP supports connecting to Windows machines with the following for
 
 #### Security Accounts Manager (SAM)
 
-SAM is supported with and without spaces.
+SAM-formatted user identifiers are supported with and without spaces.
 
 `domain\user with spaces` format:
 - The domain may have a maximum of 20 characters.
@@ -198,7 +198,7 @@ Examples:
 
 #### User Principal Name (UPN)
 
-UPN is supported with spaces, quotes, and unquoted.
+UPN-formatted user identifiers are supported with spaces, quotes, and unquoted.
 
 Examples:
 - `"user with spaces"@domain.org`
@@ -211,13 +211,18 @@ Examples:
 
 ### Clipboard file formats
 
-Browser-based RDP supports the following file formats for clipboard copy and paste actions:
+Browser-based RDP supports the following formats for text-based copy and paste actions:
 - "text/plain"
 - "text/html"
 - "image/png"
 - "HTML Format" (via CF_HTML)
 - CF_UNICODETEXT
 - CF_DIBV5 (Windows native bitmap formats)
+
+:::note
+		File transfer is not supported presently (see Known limitations below). Copying and pasting any file from the local machine to the remote machine or vice versa will not succeed.
+:::
+
 
 ### Cloudflare products
 
