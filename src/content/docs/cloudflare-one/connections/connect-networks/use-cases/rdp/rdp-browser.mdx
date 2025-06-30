@@ -209,18 +209,6 @@ Examples:
 Cloudflare will not configure user identifiers on the RDP target. Any user identifier used to authenticate must be pre-configured on the server.
 :::
 
-### Clipboard file formats
-
-Browser-based RDP supports copy and paste actions for the following types of content:
-
-| Content type | MIME type    | Windows clipboard format |
-| -----------  | ------------ | ------------------------ |
-| Plain text   | `text/plain` | `CF_UNICODETEXT`      |
-| HTML text    | `text/html`  | `CF_HTML`             |
-| PNG images   | `image/png`  | `CF_DIBV5`            |
-
-File transfers are not currently supported (refer to [Known limitations](#known-limitations)).
-
 ### Cloudflare products
 
  <Render file="access/self-hosted-app/product-compatibility" product="cloudflare-one" />
