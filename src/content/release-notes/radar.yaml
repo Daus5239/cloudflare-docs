@@ -12,7 +12,7 @@ entries:
       endpoints. Use the following replacements:
         * `/verified_bots/top/bots` → `/bots/summary/bot`
         * `/verified_bots/top/categories` → `/bots/summary/bot_category`
-      * Added [web crawlers endpoints](/api/resources/radar/subresources/bots/subresources/crawlers/).
+      * Added [web crawlers endpoints](/api/resources/radar/subresources/bots/subresources/web_crawlers/).
   - publish_date: "2025-03-20"
     title: Endpoint deprecations and new BGP real-time routes endpoint
     description: |-
