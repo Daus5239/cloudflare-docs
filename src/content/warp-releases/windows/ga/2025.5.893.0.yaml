@@ -9,7 +9,7 @@ releaseNotes: |-
   - Improved the connectivity status message in the client GUI.
   - Fixed a bug affecting clients in Gateway with DoH mode where the original DNS servers were not restored after disabling WARP.
   - The WARP client now applies post-quantum cryptography end-to-end on enabled devices accessing resources behind a Cloudflare Tunnel. This feature can be [enabled by MDM](/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/parameters/#enable_post_quantum).
-  - Improvement to handle client configuration changes made by an MDM.
+  - Improvement to handle client configuration changes made by an MDM while WARP is not running.
   - Improvements for multi-user experience to better handle fast user switching and transitions from a pre-login to a logged-in state.
   - Added a WARP client device posture check for SAN attributes to the [client certificate check](/cloudflare-one/identity/devices/warp-client-checks/client-certificate/).
   - Fixed an issue affecting Split Tunnel Include mode, where traffic outside the tunnel was blocked when switching between Wi-Fi and Ethernet networks.
