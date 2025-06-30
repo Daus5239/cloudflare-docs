@@ -5,6 +5,8 @@ sidebar:
   order: 7
 ---
 
+import { Tabs, TabItem } from "~/components";
+
 :::note[AI Audit metrics]
 AI Audit metrics are only available for customers on a paid plan.
 :::
@@ -32,13 +34,27 @@ AI Audit provides you with the following metrics to help you understand how AI c
 | Paths                              | Top five most requested paths                                            |
 | AI crawler operators               | Top five most active AI crawler operators (by requests)                  |
 
-## Filter the date range
+## Filter date range
 
-You can use date filter to narrow the scope of your result.
+You can use the date filter to choose the period of time you wish to analyze.
 
-- **Date range:** Filter the date range of your results. You can choose from three predetermined date ranges:
-  - Past 7 days
-  - Past 14 days
-  - Past month
+<Tabs>
+<TabItem label="Free plans">
+
+Filter options:
+
+- Past 24 hours
+
+</TabItem><TabItem label="Paid plans">
+
+Filter options:
+
+- Past 24 hours
+- Past 7 days
+- Past 14 days
+- Past month
+
+</TabItem>
+</Tabs>
 
 The values of the AI Audit metrics will update according to your filter.
