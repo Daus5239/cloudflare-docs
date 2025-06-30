@@ -1,0 +1,15 @@
+releaseNotes: |-
+  This release contains improvements and new exciting features, including [post-quantum cryptography](http://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/parameters/#enable_post_quantum). By tunnelling your corporate network traffic over Cloudflare, you can now gain the immediate [protection of post-quantum cryptography](https://blog.cloudflare.com/pq-2024/) without needing to upgrade any of your individual corporate applications or systems.
+
+  **Changes and improvements**
+  - Fixed a device registration issue causing WARP connection failures when changing networks.
+  - Captive portal improvements and fixes. Captive portal sign in notifications will now be sent through operating system notification services. Fix for firewall configuration issue affecting clients in DoH only mode.
+  - Improved the connectivity status message in the client GUI.
+  - The WARP client now applies post-quantum cryptography end-to-end on enabled devices accessing resources behind a Cloudflare Tunnel. This feature can be enabled by MDM.
+  - Improvement to handle client configuration changes made by MDM during disconnection upon reconnection.
+  - Fixed an issue affecting split tunnel include mode, where traffic outside the tunnel was blocked when switching between Wifi and ethernet networks.
+version: 2025.5.893.0
+releaseDate: 2025-06-30T19:44:34.251Z
+packageURL: https://downloads.cloudflareclient.com/v1/download/noble-intel/version/2025.5.893.0
+packageSize: 44788578
+platformName: Linux
