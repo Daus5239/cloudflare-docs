@@ -144,7 +144,7 @@ To connect to a Windows machine over RDP:
 	The App Launcher tile will launch a URL of the form `https://<app-domain>/rdp/<vnet-id>/<target-ip>/<port>`. You may also navigate directly to this URL.
 4. Select the port that you want to connect to. The port selection screen only appears if the Access application allows RDP traffic on multiple ports (for example, port `3389` and port `65321`).
 5. (Optional) In your browser settings, allow the Access application to access the clipboard. Clipboard permissions grant the ability to copy or paste text between the local machine and the remote Windows machine.
-6. Enter your Windows username and password. The section below on compatibility covers which formats are supported for login credentials.
+6. Enter your Windows username and password. For more information on supported login credentials, refer to [User identifier formats](#user-identifier-formats).
 
 You now have access to the remote Windows desktop.
 
@@ -176,53 +176,50 @@ Browser-based RDP supports connecting to Windows machines that run the following
 
 ### User identifier formats
 
-Browser-based RDP supports connecting to Windows machines with the following formats:
+Browser-based RDP supports connecting to Windows machines using the following login credentials:
 
-#### Security Accounts Manager (SAM)
+#### Security Account Manager (SAM)
 
 SAM-formatted user identifiers are supported with and without spaces.
 
-`domain\user with spaces` format:
-- The domain may have a maximum of 20 characters.
-- The username may have a maximum of 15 characters.
-
-`.\user` format:
-- This uses the default domain.
-- The username may have a maximum of 20 characters.
-
 Examples:
-- `DOMAIN\user with spaces`
-- `DOMAIN\user`
-- `Username`
-- `User Name`
+- `DOMAIN\username`
+- `DOMAIN\username with spaces`
+- `.\username`
+- `.\username with spaces`
+- `username`
+- `username with space`
+
+<Details header = "Character limits" open= {true}>
+Identifiers which specify a domain, such as `DOMAIN\username`, can have a maximum of 20 characters for the domain and 15 characters for the username.
+
+Identifiers without a domain, such as `.\Username`, will use the default domain. The username can have a maximum of 20 characters.
+</Details>
 
 #### User Principal Name (UPN)
 
-UPN-formatted user identifiers are supported with spaces, quotes, and unquoted.
+UPN-formatted user identifiers are supported with spaces, with and without quotes.
 
 Examples:
-- `"user with spaces"@domain.org`
-- `user with spaces@domain.org`
-- `user@domain.org`
+- `"username with spaces"@domain.org`
+- `username with spaces@domain.org`
+- `username@domain.org`
 
 :::note
-		Cloudflare will not configure any user identifier on the target. Any user identifier used to authenticate must be pre-configured on the server.
+Cloudflare will not configure user identifiers on the RDP target. Any user identifier used to authenticate must be pre-configured on the server.
 :::
 
 ### Clipboard file formats
 
-Browser-based RDP supports the following formats for text-based copy and paste actions:
-- "text/plain"
-- "text/html"
-- "image/png"
-- "HTML Format" (via CF_HTML)
-- CF_UNICODETEXT
-- CF_DIBV5 (Windows native bitmap formats)
+Browser-based RDP supports copy and paste actions for the following types of content:
 
-:::note
-		File transfer is not supported presently (see Known limitations below). Copying and pasting any file from the local machine to the remote machine or vice versa will not succeed.
-:::
+| Content type | MIME type    | Windows clipboard format |
+| -----------  | ------------ | ------------------------ |
+| Plain text   | `text/plain` | `CF_UNICODETEXT`      |
+| HTML text    | `text/html`  | `CF_HTML`             |
+| PNG images   | `image/png`  | `CF_DIBV5`            |
 
+File transfers are not currently supported (refer to [Known limitations](#known-limitations)).
 
 ### Cloudflare products
 
@@ -230,13 +227,8 @@ Browser-based RDP supports the following formats for text-based copy and paste a
 
 ## Known limitations
 
-Browser-based RDP does not currently support:
-
-- TLS certificate verification: Cloudflare uses TLS to connect to the target RDP server but does not verify the origin TLS certificate.
-- [WARP authentication](/cloudflare-one/connections/connect-devices/warp/configure-warp/warp-sessions/#configure-warp-sessions-in-access).
-- Clipboard copy and paste control: the ability to define if users can copy/paste content from the remote machine to their local machine and vice versa.
-- Audio over RDP.
-- File transfer.
-
-
-
+- **TLS certificate verification**: Cloudflare uses TLS to connect to the RDP target but does not verify the origin TLS certificate.
+- **WARP authentication**: Users cannot authenticate to RDP targets using their [WARP session identity](/cloudflare-one/connections/connect-devices/warp/configure-warp/warp-sessions/#configure-warp-sessions-in-access).
+- **Audio over RDP**: Users cannot use their microphone and speaker to interact with the remote machine.
+- **Clipboard controls**: Admins do not have the ability to restrict copy/paste actions between the remote machine and the user's local clipboard.
+- **File transfers**: Users cannot copy/paste files from their local machine to the remote machine and vice versa.
