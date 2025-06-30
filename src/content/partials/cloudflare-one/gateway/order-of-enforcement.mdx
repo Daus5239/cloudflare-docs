@@ -208,9 +208,17 @@ When [resolver policies](/cloudflare-one/policies/gateway/resolver-policies/) ar
 
 ### Order of precedence
 
-Order of precedence refers to the priority of individual policies within the DNS, network, or HTTP policy builder (lowest value first, or from top to bottom as shown in the dashboard). You can modify the order of precedence by dragging and dropping individual policies in the dashboard.
+Order of precedence refers to the priority of individual policies within the DNS, network, or HTTP policy builder. Gateway evaluates policies in ascending order beginning with the lowest value.
 
-In Gateway, the order of precedence follows the first match principle — once a site matches an Allow or Block policy, evaluation stops and no subsequent policies can override the decision. Therefore, Cloudflare recommends putting the most specific policies and exceptions at the top of the list and the most general policies at the bottom.
+The order of precedence follows the first match principle. Once traffic matches an Allow or Block policy, evaluation stops and no subsequent policies can override the decision. Therefore, Cloudflare recommends assigning the most specific policies and exceptions with the highest precedence and the most general policies with the lowest precedence.
+
+#### Zero Trust dashboard
+
+In the Zero Trust dashboard, policies are in order of precedence from top to bottom of the list. Policies begin with precedence `1` and count upward. You can modify the order of precedence by dragging and dropping individual policies in the dashboard.
+
+#### Cloudflare API
+
+To update the precedence of a policy with the Cloudflare API, use the [Update a Zero Trust Gateway rule](/api/resources/zero_trust/subresources/gateway/subresources/rules/methods/update/) endpoint to update the `precedence` field.
 
 #### DLP policy precedence
 
